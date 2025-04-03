@@ -29,9 +29,15 @@ const RecordDetails = () => {
     return (
         record && (
             <Box minH="100vh" py={10}>
-                <Flex direction="column" align="center" maxW="800px" mx="auto">
+                <Flex
+                    direction="column"
+                    align="center"
+                    maxW="80%"
+                    mx="auto"
+                    minW="30%"
+                >
                     <HStack gap={4}>
-                        <Box w="600px">
+                        <Box width="30vw">
                             <PDFUploadForm />
                         </Box>
                         <RecordForm key={record.updatedAt} />

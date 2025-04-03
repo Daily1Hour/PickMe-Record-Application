@@ -61,7 +61,7 @@ const RecordForm = () => {
             <FormProvider {...methods}>
                 <form
                     onSubmit={methods.handleSubmit(onSubmit)}
-                    style={{ width: "800px", height: "500px", padding: "20px" }}
+                    style={{ width: "40vw", height: "50vw", padding: "20px" }}
                 >
                     <Stack>
                         <Heading>내 기록</Heading>
