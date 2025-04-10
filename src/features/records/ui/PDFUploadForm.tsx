@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import { FaRegFilePdf } from "react-icons/fa6";
+import { FaRegFilePdf, FaUpload } from "react-icons/fa6";
 import { GrFormTrash } from "react-icons/gr";
 import { Box, VStack, Input, Text, Button, HStack } from "@chakra-ui/react";
-import { Field } from "@/shared/chakra-ui/Field";
 
 const PDFUploadForm: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [pdfURL, setPdfURL] = useState<string | null>(null);
 
-    // 파일 선택 핸들러
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
             if (file.type === "application/pdf") {
                 setSelectedFile(file);
-                setPdfURL(URL.createObjectURL(file)); // 브라우저에서 PDF 미리보기 URL 생성
+                setPdfURL(URL.createObjectURL(file));
             } else {
                 alert("Only PDF files are allowed!");
                 setSelectedFile(null);
@@ -31,22 +29,43 @@ const PDFUploadForm: React.FC = () => {
     return (
         <Box
             p={8}
-            width="600px"
-            height="700px"
+            width="30vw"
+            height="80vh"
+            minH="300px"
             position="fixed"
             alignContent="center"
-            top="50px"
+            top="10vh"
             borderWidth="1px"
             borderRadius="md"
         >
             <VStack align="stretch">
-                <Field label="이력서를 업로드해주세요.">
-                    <Input
-                        type="file"
-                        accept=".pdf"
-                        onChange={handleFileChange}
-                    />
-                </Field>
+                {!selectedFile && (
+                    <Box>
+                        <Text>이력서를 업로드 해주세요.</Text>
+                        <label htmlFor="resume-upload">
+                            <Box
+                                p={5}
+                                border="1px solid gray"
+                                borderRadius="15px"
+                                cursor="pointer"
+                                _hover={{ bg: "gray.100" }}
+                                display="flex"
+                                flexDir="column"
+                                alignItems="center"
+                            >
+                                <Text>PDF 업로드</Text>
+                                <FaUpload size="24px" color="gray.500" />
+                            </Box>
+                        </label>
+                        <Input
+                            id="resume-upload"
+                            type="file"
+                            accept=".pdf"
+                            onChange={handleFileChange}
+                            display="none"
+                        />
+                    </Box>
+                )}
                 {selectedFile && (
                     <HStack justify="space-between" width="100%">
                         <Text>
@@ -63,11 +82,11 @@ const PDFUploadForm: React.FC = () => {
                     </HStack>
                 )}
                 {pdfURL && (
-                    <Box mt={4} overflow="hidden">
+                    <Box mt={4} overflow="hidden" height="60vh">
                         <iframe
                             src={pdfURL}
                             width="100%"
-                            height="500px"
+                            height="100%"
                             title="PDF Preview"
                         ></iframe>
                     </Box>
