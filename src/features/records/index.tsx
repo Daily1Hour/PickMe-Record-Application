@@ -21,7 +21,9 @@ const RecordDetails = () => {
     });
 
     useEffect(() => {
-        if (fetchedRecord) {
+        if (!id) {
+            setRecord(Record.empty());
+        } else if (fetchedRecord) {
             setRecord(fetchedRecord);
         }
     }, [fetchedRecord, setRecord]);
