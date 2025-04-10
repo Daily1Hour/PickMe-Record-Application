@@ -59,7 +59,9 @@ Pick-Me는 면접 예상 질문 답변을 작성해 면접에 대비하고 지�
 
 ## 🧩컴포넌트 구성
 
-~이미지파일~
+![pickmeRecord](https://github.com/user-attachments/assets/c8489279-0c04-4b60-9d36-1a02544e62e9)
+
+
 
 ## 📖기록 프론트엔드 실행 가이드
 
