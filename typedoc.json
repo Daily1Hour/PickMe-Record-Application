@@ -1,0 +1,9 @@
+{
+    "entryPoints": ["src"],
+    "entryPointStrategy": "expand",
+    "out": "dist/docs",
+    "highlightLanguages": ["ts", "js", "json", "python", "mermaid", "sh"],
+    "validation": {
+        "notExported": false
+    }
+}
