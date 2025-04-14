@@ -26,8 +26,8 @@ Pick-Me는 면접 예상 질문 답변을 작성해 면접에 대비하고 지�
 
 기록 페이지에서는 자신이 쓴 이력서를 참고하면서 면접에 대한 예상 질문과 그에 따른 답변을 먼저 정리하면서 대비할 수 있습니다.
 
-[🔗 기록 페이지 바로가기](#https://daily1hour.github.io/PickMe-Record-Application/)  
-[🔗 배포된 통합 웹 사이트 바로가기](#https://main.dpdmc4drvy3w0.amplifyapp.com/)
+[🔗 기록 페이지 바로가기](https://daily1hour.github.io/PickMe-Record-Application/)  
+[🔗 배포된 통합 웹 사이트 바로가기](https://main.dpdmc4drvy3w0.amplifyapp.com/)
 
 > 새 창 열기 : CTRL+Click (Windows and Linux) / CMD+Click (MacOS)
 
@@ -170,7 +170,7 @@ pickme
 
 ## 📖기록 프론트엔드 실행 가이드
 
-[🔗 기록 서비스 백엔드 깃허브 바로가기](#https://github.com/Daily1Hour/PickMe-Records-Service)
+[🔗 기록 서비스 백엔드 깃허브 바로가기](https://github.com/Daily1Hour/PickMe-Records-Service)
 
 ```sh
 $ npm install
