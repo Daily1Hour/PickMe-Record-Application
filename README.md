@@ -15,6 +15,7 @@
 -   [🎥데모](#데모)
 -   [🛠기술 스택](#기술-스택)
 -   [🧩컴포넌트 구성](#컴포넌트-구성)
+-   [📁폴더 구조](#폴더-구조)
 -   [실행 가이드](#기록-프론트엔드-실행-가이드)
 
 <br/>
@@ -76,6 +77,96 @@ https://github.com/user-attachments/assets/86aac483-af02-4e5c-b7c1-7fe5a67450bf
 ![pickmeRecord](https://github.com/user-attachments/assets/c8489279-0c04-4b60-9d36-1a02544e62e9)
 
 <br/>
+
+## 📁폴더 구조
+
+```python
+pickme
+├─ .env # 환경변수
+├─ .env.sample
+├─ .env.single-spa
+├─ .prettierrc # 포맷터
+├─ eslint.config.js
+├─ index.html
+├─ src
+│  ├─ app
+│  │  ├─ App.tsx
+│  │  ├─ application.tsx # single-spa 진입점
+│  │  ├─ main.tsx
+│  │  ├─ parcel.tsx
+│  │  └─ router.tsx # 라우터
+│  ├─ entities # 프로젝트 엔터티
+│  │  └─ records
+│  │     └─ model
+│  │        ├─ Detail.ts
+│  │        ├─ index.ts
+│  │        ├─ Record.ts # 인터페이스
+│  │        └─ Summary.ts
+│  ├─ features # 기능 구현
+│  │  ├─ records
+│  │  │  ├─ api
+│  │  │  │  ├─ detailsApi.ts # 데이터 조회, 생성, 삭제
+│  │  │  │  └─ recordsDTOList.ts # 데이터 전송 객체
+│  │  │  ├─ hook
+│  │  │  │  ├─ useQaMutation.ts # Qa폼에서 사용할 데이터 관리, 처리
+│  │  │  │  └─ useRecordMutation.ts # Record폼에서 사용할 데이터 관리, 처리
+│  │  │  ├─ index.tsx
+│  │  │  ├─ model # 폼 스키마
+│  │  │  │  └─ RecordSchema.ts
+│  │  │  ├─ service # 레코드 관련 엔터티<->dto 변환 메소드
+│  │  │  │  ├─ detailToDto.ts
+│  │  │  │  ├─ dtoToRecord.ts
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ recordToDto.test.ts
+│  │  │  │  └─ recordToDto.ts
+│  │  │  ├─ store # 중앙 상태 저장소
+│  │  │  │  └─ recodStore.ts
+│  │  │  └─ ui
+│  │  │     ├─ AddDetail.tsx # 세부정보(질문/답변) 필드 추가 버튼
+│  │  │     ├─ DeleteConfirm.tsx # 삭제 확인 경고성 다이얼로그
+│  │  │     ├─ DeleteDetail.tsx # 세부정보 삭제 버튼
+│  │  │     ├─ EditableControl.tsx
+│  │  │     ├─ EditableField.tsx
+│  │  │     ├─ index.ts
+│  │  │     ├─ LabelForm.tsx # 라벨(회사명/면접유형) 폼
+│  │  │     ├─ PDFUploadForm.tsx # pdf 미리보기 폼
+│  │  │     ├─ QaField.tsx # 질문/답변 필드
+│  │  │     ├─ QaForm.tsx # 질문/답변 관리 컴포넌트
+│  │  │     └─ RecordForm.tsx # 레코드 전체 관리 컴포넌트
+│  │  └─ side
+│  │     ├─ api
+│  │     │  └─ sideApi.ts # 사이드바 데이터 가져오기
+│  │     ├─ hook
+│  │     │  └─ usePagination.ts # 페이지네이션
+│  │     ├─ index.tsx # 사이드바 컴포넌트
+│  │     └─ service # 사이드바 엔터티<->dto 변환 메소드
+│  │        ├─ dtoToSide.ts
+│  │        └─ index.ts
+│  ├─ pages # 페이지
+│  │  └─ records
+│  │     └─ index.tsx
+│  └─ shared # 공유
+│     ├─ api
+│     │  ├─ client.ts # Axios 인스턴스
+│     │  ├─ index.ts
+│     │  ├─ router.ts # 의존성 역전(DIP), 의존성 주입
+│     │  └─ tokens.ts # 토큰 3종 호출 및 추출
+│     └─ chakra-ui
+│        ├─ color-mode.tsx
+│        ├─ Field.tsx
+│        ├─ input-group.tsx
+│        ├─ provider.tsx
+│        └─ toaster.tsx
+├─ steiger.config.ts # FSD 린트
+├─ styleguide-types.d.ts
+├─ tsconfig.app.json
+├─ tsconfig.json
+├─ tsconfig.node.json
+├─ typedoc.json
+├─ vite-env.d.ts # 환경변수 타입 정의
+└─ vite.config.ts # Vite 설정
+
+```
 
 ## 📖기록 프론트엔드 실행 가이드
 
