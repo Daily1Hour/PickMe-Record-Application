@@ -44,7 +44,7 @@ Pick-Me는 면접 예상 질문 답변을 작성해 면접에 대비하고 지�
 
 ## 🎥데모
 
-https://github.com/user-attachments/assets/86aac483-af02-4e5c-b7c1-7fe5a67450bf
+https://github.com/user-attachments/assets/bcd9e317-a446-46d0-a993-dd176e6bb814
 
 <br/>
 
