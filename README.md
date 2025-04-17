@@ -64,6 +64,116 @@ https://github.com/user-attachments/assets/bcd9e317-a446-46d0-a993-dd176e6bb814
 
 <br/>
 
+### 컴포넌트 의존성 그래프
+
+```mermaid
+graph TD
+    App --> RecordDetails
+    RecordDetails --> PDFUploadForm
+    RecordDetails --> RecordForm
+
+    ZustandStore[(Zustand Store)]
+    RecordDetails -.->|setRecord| ZustandStore
+    ZustandStore -.->|record| RecordForm
+
+    RecordForm --> LabelForm
+    RecordForm --> QaForm
+
+    FormProvider[(FormProvider)]
+    RecordForm -.->|useForm| FormProvider
+    FormProvider -.->|useFormContext| LabelForm
+    FormProvider -.->|useFieldArray| QaForm
+```
+
+### 상태 전이 다이어그램
+
+```mermaid
+stateDiagram-v2
+    state "RecordDetails" as RD {
+        RD/Fetching: Fetching
+        RD/Empty: Empty
+        RD/Loaded: Loaded
+        state if_exist_id <<choice>>
+        state if_fetch <<choice>>
+        state join_state <<join>>
+
+        [*] --> if_exist_id: 경로 확인<br>useParams()
+        if_exist_id --> RD/Fetching: id 있음
+        if_exist_id --> RD/Empty: id 없음
+
+        RD/Fetching --> if_fetch: 데이터 패칭<br>useQuery()
+        if_fetch --> RD/Empty: fetch 실패
+        if_fetch --> RD/Loaded: fetch 성공
+
+        RD/Empty --> join_state
+        RD/Loaded --> join_state
+    }
+
+    note right of RD/Fetching
+        API를 통해 비동기로 데이터를 패칭해 업데이트
+    end note
+
+    state "Zustand Store" as Store {
+        Store/Updated: Updated
+        Store/Notifier: Notifier
+
+        [*] --> Dispatcher: 상태 초기화<br>setRecord(Empty)
+        Dispatcher --> Reducer: 내부 로직 처리
+        Reducer --> Store/Updated: 상태 갱신
+        Store/Updated --> Store/Notifier: 구독자들에게 알림
+    }
+
+    note left of Store
+        Flux 방식의 상태저장소
+        단방향 데이터 구조
+    end note
+
+    state "RecordForm" as RF {
+        RF/Rendering: Rendering
+        RF/Submitting: Submtting
+        RF/Send: Send
+
+        [*] --> RF/Rendering: 상태 구독<br>useRecordStore()
+        RF/Submitting --> RF/Send: 전송<br>useMutation(record)
+    }
+
+    state "FormProvider" as FP {
+        FP/Updated: Updated
+        FP/Notifier: Notifier
+
+        [*] --> FP/Updated: 상태 초기화
+        FP/Updated --> FP/Notifier: 구독자들에게 알림
+    }
+
+    note left of FP
+        react-hook-form의
+        폼 상태 컨텍스트 전달자
+    end note
+
+    state "LabelForm" as LF {
+        LF/Rendering: Rendering
+        LF/Updated: Updated
+
+        [*] --> LF/Rendering: 상태 구독<br>useFormContext()
+        LF/Rendering --> LF/Updated: 렌더링 완료
+    }
+
+    state "QaForm" as QF {
+        QF/Rendering: Rendering
+        QF/Updated: Updated
+
+        [*] --> QF/Rendering: 상태 구독<br>useFieldArray()
+        QF/Rendering --> QF/Updated: 렌더링 완료
+    }
+
+    join_state --> Dispatcher: 발송<br>setRecord(Data)
+    Store/Notifier --> RF/Rendering: 알림<br>record
+    FP/Notifier --> RF/Submitting: 제출<br>onSubmit(record)
+    FP/Notifier --> LF/Rendering: 알림<br>record
+    FP/Notifier --> QF/Rendering: 알림<br>record
+    RF/Rendering --> FP/Updated: 폼 갱신<br>useForm(record)
+```
+
 ## 🧩컴포넌트 구성
 
 ### 📝Figma
